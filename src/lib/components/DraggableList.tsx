@@ -2,11 +2,11 @@
 
 import { useMemo, useRef, useState } from "react";
 
+import { getSortedFiles } from "../helpers";
 import { useDragNDrop } from '../hooks/useDragNDrop';
 import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
-import { getSortedFiles } from "../helpers";
-import { Preview } from "./Preview/Preview";
+import { FileCard } from './FileCard';
 
 export const DraggableList: React.FC = () => {
   const { files, moveFile } = useDragNDrop()
@@ -47,7 +47,8 @@ export const DraggableList: React.FC = () => {
   return (
     <DraggableSpace ref={wrapperRef}>
       {sortedFiles.map(item => (
-        <div
+        <FileCard
+          file={item}
           key={item.id}
           draggable
           onDragStart={e => handleDragStart(e, item)}
@@ -55,27 +56,11 @@ export const DraggableList: React.FC = () => {
           onDragOver={e => handleDragOver(e, item)}
           onDrop={handleDrop}
           className={`
-              tw:px-3 tw:py-2
-              tw:w-60
-              tw:rounded-md
-              tw:text-white 
-              tw:bg-black
-              tw:cursor-grab 
-              tw:flex
-              tw:flex-col 
-              tw:justify-center
-              tw:gap-2
-              tw:transition-colors
-              ${draggedOverItem?.id === item.id ? 'tw:bg-gray-600' : ''}
-              ${draggedItem?.id === item.id ? 'tw:opacity-50' : ''}
-            `}
+            ${draggedOverItem?.id === item.id ? 'tw:bg-gray-600' : ''}
+            ${draggedItem?.id === item.id ? 'tw:opacity-50' : ''}
+          `}
         >
-          <p className="tw:truncate">{item.altText}</p>
-          <p className="tw:truncate">{item.sortIndex}</p>
-          <div className="tw:flex tw:items-center tw:justify-center tw:h-20">
-            <Preview file={item} />
-          </div>
-        </div>
+        </FileCard>
       ))}
     </DraggableSpace>
   );

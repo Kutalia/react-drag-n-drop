@@ -34,6 +34,8 @@ const DragNDrop: React.FC<Props> = ({ multiple, accept }) => {
             <p>Drag 'n' drop some files here, or click to select files</p>
         }
       </div>
+      <input placeholder='Or input file URL here' />
+      <button>Save</button>
       <DraggableList />
     </div>
   )

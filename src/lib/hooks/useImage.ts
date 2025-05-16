@@ -9,7 +9,7 @@ interface ImgObj {
 export const useImage = (src: string | null) => {
   const [image, setImage] = useState<ImgObj>({ src: null, status: 'loading' });
   const imgEl = useRef<HTMLImageElement>(null);
-  const loadedUrls = useRef(new Set());
+  const loadedUrls = useRef(new Set()); // For caching urls if source prop changes
 
   useEffect(() => {
     const onload = () => {
