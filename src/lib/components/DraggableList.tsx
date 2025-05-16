@@ -1,9 +1,12 @@
+// Reused ideas from https://github.com/diragb/shadcn-dropzone
+
 import { useMemo, useRef, useState } from "react";
 
 import { useDragNDrop } from '../hooks/useDragNDrop';
 import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
 import { getSortedFiles } from "../helpers";
+import { Preview } from "./Preview/Preview";
 
 export const DraggableList: React.FC = () => {
   const { files, moveFile } = useDragNDrop()
@@ -39,11 +42,11 @@ export const DraggableList: React.FC = () => {
     setDraggedOverItem(null);
   };
 
-  const items = useMemo(() => getSortedFiles(files), [files])
+  const sortedFiles = useMemo(() => getSortedFiles(files), [files])
 
   return (
     <DraggableSpace ref={wrapperRef}>
-      {items.map(item => (
+      {sortedFiles.map(item => (
         <div
           key={item.id}
           draggable
@@ -52,25 +55,25 @@ export const DraggableList: React.FC = () => {
           onDragOver={e => handleDragOver(e, item)}
           onDrop={handleDrop}
           className={`
-              tw:px-2 py-1
-              tw:h-24
+              tw:px-3 tw:py-2
+              tw:w-60
               tw:rounded-md
               tw:text-white 
               tw:bg-black
               tw:cursor-grab 
-              tw:flex 
-              tw:items-center
+              tw:flex
+              tw:flex-col 
               tw:justify-center
+              tw:gap-2
               tw:transition-colors
-              tw:whitespace-nowrap
               ${draggedOverItem?.id === item.id ? 'tw:bg-gray-600' : ''}
               ${draggedItem?.id === item.id ? 'tw:opacity-50' : ''}
             `}
         >
-          {/* TODO: test moving files again to make sure they are sorted correctly */}
-          <div>
-            <p>{item.altText}</p>
-            <p>{item.sortIndex}</p>
+          <p className="tw:truncate">{item.altText}</p>
+          <p className="tw:truncate">{item.sortIndex}</p>
+          <div className="tw:flex tw:items-center tw:justify-center tw:h-20">
+            <Preview file={item} />
           </div>
         </div>
       ))}
