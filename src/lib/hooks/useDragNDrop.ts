@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { DragNDropContext } from "../contexts/DragNDrop.context"
 
 export const useDragNDrop = () => {
-  const context = useContext(DragNDropContext)
+  const { files, config , dispatch } = useContext(DragNDropContext)
 
-  return context
+  return { files, config, dispatch }
 }
