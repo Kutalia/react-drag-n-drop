@@ -34,6 +34,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     className={`
       tw:px-3 tw:py-2
       tw:w-60
+      tw:h-74
       tw:rounded-md
       tw:text-white 
       tw:bg-black
@@ -56,6 +57,6 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
       <input className="tw:w-full" placeholder='File source' ref={sourceInputRef} />
       <button onClick={handleEditSource}>Save</button>
     </div>
-    <button onClick={removeFile}>Remove</button>
+    <button className="tw:cursor-pointer" onClick={removeFile}>Remove</button>
   </div>
 }

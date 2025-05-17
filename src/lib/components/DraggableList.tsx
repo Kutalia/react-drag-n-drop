@@ -8,6 +8,7 @@ import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
 import { FileCard } from './FileCard';
 import { ActionTypes } from "../contexts/DragNDrop.reducer";
+import { FileDropCard } from './FileDropCard'
 
 export const DraggableList: React.FC = () => {
   const { files, dispatch } = useDragNDrop()
@@ -47,6 +48,7 @@ export const DraggableList: React.FC = () => {
 
   return (
     <DraggableSpace ref={wrapperRef}>
+      <FileDropCard />
       {sortedFiles.map(item => (
         <FileCard
           file={item}
