@@ -6,7 +6,7 @@ import { getSortedFiles } from "../helpers";
 import { useDragNDrop } from '../hooks/useDragNDrop';
 import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
-import { FileCard } from './FileCard';
+import { FileCard } from './FileCard/FileCard';
 import { ActionTypes } from "../contexts/DragNDrop.reducer";
 import { FileDropCard } from './FileDropCard/FileDropCard'
 

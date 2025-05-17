@@ -52,14 +52,14 @@ export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
       tw:self-stretch
       tw:px-3 tw:py-2
       tw:w-60
-      tw:h-70
+      tw:h-72
       tw:rounded-md
       tw:text-white 
       tw:bg-black
       tw:flex
       tw:flex-col 
       tw:justify-end
-      tw:gap-4
+      tw:gap-5
       tw:relative
     `}
     {...rest}
@@ -75,8 +75,8 @@ export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
           </p>
       }
     </div>
-    <div className="tw:flex tw:gap-2 tw:pb-2">
-      <input className="tw:w-full" placeholder='File source' ref={sourceInputRef} />
+    <div className="tw:flex tw:gap-2 tw:pb-4">
+      <input className={`tw:w-full ${classes.input}`} placeholder='File source' ref={sourceInputRef} />
       <button onClick={handleAddFromSource}>Save</button>
     </div>
   </div>

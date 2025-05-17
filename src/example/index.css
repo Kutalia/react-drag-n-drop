@@ -3,6 +3,7 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
 
+/* https://uiverse.io/mihocsaszilard/bad-snake-37 */
 .container {
   width: 100%;
   height: 100%;

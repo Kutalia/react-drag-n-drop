@@ -1,9 +1,11 @@
-import type { StoredFile } from '../types'
-import { Preview } from '../components/Preview/Preview'
-import { useDragNDrop } from '../hooks/useDragNDrop'
-import { ActionTypes } from '../contexts/DragNDrop.reducer'
 import { useCallback, useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
+
+import { ActionTypes } from '../../contexts/DragNDrop.reducer'
+import { useDragNDrop } from '../../hooks/useDragNDrop'
+import type { StoredFile } from '../../types'
+import { Preview } from '../Preview/Preview'
+import classes from './FileCard.module.css'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   file: StoredFile
@@ -52,7 +54,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     className={`
       tw:px-3 tw:py-2
       tw:w-60
-      tw:h-70
+      tw:h-72
       tw:rounded-md
       tw:text-white 
       tw:bg-black
@@ -60,7 +62,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
       tw:flex
       tw:flex-col 
       tw:justify-center
-      tw:gap-4
+      tw:gap-5
       tw:transition-colors ${className || ''}
     `}
     {...rest}
@@ -90,6 +92,6 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
       />
       <button onClick={handleEditSource}>Save</button>
     </div>
-    <button className="tw:cursor-pointer" onClick={removeFile}>Remove</button>
+    <button className={`tw:cursor-pointer tw:mx-auto ${classes.button}`} onClick={removeFile}><span>Remove</span></button>
   </div>
 }

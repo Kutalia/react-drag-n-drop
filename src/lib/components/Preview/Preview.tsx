@@ -5,7 +5,7 @@ import { useImage } from '../../hooks/useImage'
 import type { StoredFile } from '../../types'
 import { ImagePreviewFail } from './ImgPreviewFail'
 import { UndefinedObjPreview } from './UndefinedObjPreview'
-import { PreviewLoader } from './PreviewLoader'
+import { Loader } from '../Loader/Loader'
 
 interface Props {
   file: StoredFile
@@ -44,7 +44,7 @@ export const Preview: React.FC<Props> = ({ file }) => {
 
   return (
     <ErrorBoundary FallbackComponent={ImagePreviewFail}>
-      <Suspense fallback={<PreviewLoader />}>
+      <Suspense fallback={<Loader />}>
         <PreviewComponent file={file} />
       </Suspense>
     </ErrorBoundary>
