@@ -8,7 +8,7 @@ import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
 import { FileCard } from './FileCard';
 import { ActionTypes } from "../contexts/DragNDrop.reducer";
-import { FileDropCard } from './FileDropCard'
+import { FileDropCard } from './FileDropCard/FileDropCard'
 
 export const DraggableList: React.FC = () => {
   const { files, dispatch } = useDragNDrop()

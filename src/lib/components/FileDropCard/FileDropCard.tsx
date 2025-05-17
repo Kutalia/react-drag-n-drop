@@ -1,8 +1,10 @@
 import { useDropzone } from 'react-dropzone'
-import { useDragNDrop } from '../hooks/useDragNDrop'
+import { useDragNDrop } from '../../hooks/useDragNDrop'
 
 import { useCallback, useRef } from "react"
-import { ActionTypes } from '../contexts/DragNDrop.reducer'
+import { ActionTypes } from '../../contexts/DragNDrop.reducer'
+
+import classes from './FileDropCard.module.css'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
@@ -67,7 +69,10 @@ export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
       {
         isDragActive
           ? <p>Drop the files here ...</p>
-          : <p className="tw:text-8xl tw:absolute tw:left-1/2 tw:top-1/2 tw:translate-[-50%] tw:cursor-pointer">➕</p>
+          : <p
+            className={`tw:absolute tw:left-1/2 tw:top-1/2 tw:translate-[-50%] tw:cursor-pointer tw:select-none ${classes.button}`}>
+              Drop&nbsp;{multiple ? 'files' : 'a file'}
+          </p>
       }
     </div>
     <div className="tw:flex tw:gap-2 tw:pb-2">
