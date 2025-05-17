@@ -6,9 +6,7 @@ import { ActionTypes } from '../../contexts/DragNDrop.reducer'
 
 import classes from './FileDropCard.module.css'
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-}
-export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
+export const FileDropCard: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ ...rest }) => {
   const { config: { multiple, accept }, dispatch } = useDragNDrop()
 
   const onDrop = useCallback((acceptedFiles: File[]) => {

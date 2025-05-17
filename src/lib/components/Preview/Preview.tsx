@@ -29,7 +29,7 @@ const PreviewComponent: React.FC<Props> = ({ file: { file: fileObj, source } }) 
 
   const { src, hasFailed, isLoading, isLoaded, clear } = useImage(imgUrl)
 
-  useEffect(() => clear, [])
+  useEffect(() => clear, [clear])
 
   if (isLoaded && !src) {
     return <PreviewFail text="No file provided" />

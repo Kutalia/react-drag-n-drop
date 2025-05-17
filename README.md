@@ -1,3 +1,6 @@
+For simplicity, I am not manually checking MIME type when inputting a source URL
+Although it's possible by checking magic numbers inside binary [like this](https://gist.github.com/topalex/ad13f76150e0b36de3c4a3d5ba8dc63a)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

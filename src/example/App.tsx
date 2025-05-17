@@ -11,6 +11,12 @@ const getRandomItem = () => {
   }
 }
 
+// It must be memoized to avoid rerender loop
+const accept = {
+    'image/png': ['.png'],
+    'text/html': ['.html', '.htm'],
+  }
+
 function App() {
   const { dispatch } = useDragNDrop()
 
@@ -20,12 +26,13 @@ function App() {
     dispatch({
       type: ActionTypes.ADD_FILES, payload: initialData
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="tw:bg-amber-100 tw:min-h-screen container">
       <DragNDrop
         multiple
+        accept={accept}
       />
     </div>
   )

@@ -23,7 +23,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
         source: null,
       }
     })
-  }, [file])
+  }, [file, dispatch])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ multiple: false, onDrop, accept })
 

@@ -13,7 +13,7 @@ const DragNDrop: React.FC<Configuration> = ({ multiple, accept }) => {
       type: ActionTypes.CONFIGURE,
       payload: { multiple, accept }
     })
-  }, [multiple, accept])
+  }, [multiple, accept, dispatch])
 
   return (
     <div className="react-drag-n-drop-wrapper">
