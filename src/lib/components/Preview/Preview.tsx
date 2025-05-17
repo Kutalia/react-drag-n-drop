@@ -1,10 +1,9 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { useImage } from '../../hooks/useImage'
 import type { StoredFile } from '../../types'
-import { ImagePreviewFail } from './ImgPreviewFail'
-import { UndefinedObjPreview } from './UndefinedObjPreview'
+import { PreviewFail } from '../PreviewFail/PreviewFail'
 import { Loader } from '../Loader/Loader'
 
 interface Props {
@@ -28,25 +27,33 @@ const PreviewComponent: React.FC<Props> = ({ file: { file: fileObj, source } }) 
     }
   }, [fileObj, source])
 
-  const { src } = useImage(imgUrl)
+  const { src, hasFailed, isLoading, isLoaded, clear } = useImage(imgUrl)
 
-  if (!src) {
-    return <UndefinedObjPreview />
+  useEffect(() => clear, [])
+
+  if (isLoaded && !src) {
+    return <PreviewFail text="No file provided" />
   }
 
-  return <img className="tw:w-full tw:h-full tw:object-contain tw:pointer-events-none" src={src} />
+  if (hasFailed) {
+    return <PreviewFail text="Preview failed" />
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return <img className="tw:w-full tw:h-full tw:object-contain tw:pointer-events-none" src={src as string} />
 }
 
 export const Preview: React.FC<Props> = ({ file }) => {
   if (!(file.source || file.file)) {
-    return <UndefinedObjPreview />
+    return <PreviewFail text="No file provided" />
   }
 
   return (
-    <ErrorBoundary FallbackComponent={ImagePreviewFail}>
-      <Suspense fallback={<Loader />}>
-        <PreviewComponent file={file} />
-      </Suspense>
+    <ErrorBoundary fallbackRender={() => <PreviewFail text="Invalid error occurred" />}>
+      <PreviewComponent file={file} />
     </ErrorBoundary>
   )
 }

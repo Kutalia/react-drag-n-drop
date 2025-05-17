@@ -1,5 +1,5 @@
 // Based on https://gist.github.com/jordymeow/ed083811e407e89b49c0eecd7f722695
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 interface ImgObj {
   src: string | null
@@ -47,12 +47,19 @@ export const useImage = (src: string | null) => {
       setImage({ src, status: 'loading' });
     }
   }, [src]);
+  
+  const clear = useCallback(() => {
+    if (imgEl.current) {
+      imgEl.current.remove()
+    }
+  }, [])
 
   return {
     src: image.src,
     isLoading: image.status === 'loading',
     isLoaded: image.status === 'loaded',
-    hasFailed: image.status === 'failed'
+    hasFailed: image.status === 'failed',
+    clear,
   };
 };
 
