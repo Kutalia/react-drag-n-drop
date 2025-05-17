@@ -7,7 +7,7 @@ import { ActionTypes } from '../contexts/DragNDrop.reducer'
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
-  const { files, config: { multiple, accept }, dispatch } = useDragNDrop()
+  const { config: { multiple, accept }, dispatch } = useDragNDrop()
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     dispatch({
@@ -18,7 +18,7 @@ export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
           altText: file.name,
         }))]
     })
-  }, [files])
+  }, [dispatch])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: multiple, accept })
 

@@ -34,7 +34,7 @@ const PreviewComponent: React.FC<Props> = ({ file }) => {
     return <UndefinedObjPreview />
   }
 
-  return <img className="tw:w-full tw:h-full tw:object-contain" src={src} />
+  return <img className="tw:w-full tw:h-full tw:object-contain tw:pointer-events-none" src={src} />
 }
 
 export const Preview: React.FC<Props> = ({ file }) => {

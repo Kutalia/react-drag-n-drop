@@ -2,7 +2,8 @@ import type { StoredFile } from '../types'
 import { Preview } from '../components/Preview/Preview'
 import { useDragNDrop } from '../hooks/useDragNDrop'
 import { ActionTypes } from '../contexts/DragNDrop.reducer'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   file: StoredFile
@@ -10,7 +11,19 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
   const sourceInputRef = useRef<HTMLInputElement>(null)
 
-  const { dispatch } = useDragNDrop()
+  const { config: { accept }, dispatch } = useDragNDrop()
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    dispatch({
+      type: ActionTypes.EDIT_FILE, payload: {
+        id: file.id,
+        file: acceptedFiles[0],
+        source: null,
+      }
+    })
+  }, [file])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ multiple: false, onDrop, accept })
 
   const removeFile = () => {
     dispatch({ type: ActionTypes.REMOVE_FILE, payload: file.id })
@@ -49,8 +62,14 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
   >
     <p className="tw:truncate">{file.altText}&nbsp;</p>
     <p className="tw:truncate">{file.sortIndex}</p>
-    <div className="tw:flex tw:items-center tw:justify-center tw:h-20">
-      <Preview file={file} />
+    <div {...getRootProps()} className="tw:flex tw:items-center tw:justify-center tw:h-20">
+      <input {...getInputProps()} />
+      {
+        isDragActive
+          ? <p>Drop the file to replace the item ...</p>
+          : <Preview file={file} />
+      }
+
     </div>
     <input placeholder="Input file description" onChange={(e) => editAltText(e.target.value)} />
     <div className="tw:flex tw:gap-2">

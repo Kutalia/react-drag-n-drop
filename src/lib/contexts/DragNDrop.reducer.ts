@@ -14,6 +14,13 @@ interface State {
   config: Configuration
 }
 
+export const initialState: State = {
+  files: [],
+  config: {
+    multiple: true
+  }
+}
+
 export enum ActionTypes {
   ADD_FILES = 'add_file',
   MOVE_FILE = 'move_file',
