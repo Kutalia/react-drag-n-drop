@@ -4,7 +4,6 @@ import { Preview } from '../components/Preview/Preview'
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   file: StoredFile
 }
-
 export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
   return <div
     key={file.id}

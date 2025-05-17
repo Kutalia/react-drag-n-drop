@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { useDropzone, type Accept } from 'react-dropzone';
 import { DraggableList } from "./components/DraggableList";
 import { useDragNDrop } from './hooks/useDragNDrop';
+import { ActionTypes } from './contexts/DragNDrop.reducer';
 
 interface Props {
   multiple?: boolean
@@ -11,15 +12,17 @@ interface Props {
 }
 
 const DragNDrop: React.FC<Props> = ({ multiple, accept }) => {
-  const { files, addFiles } = useDragNDrop()
+  const { files, dispatch } = useDragNDrop()
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    addFiles([
-      ...acceptedFiles.map((file) => ({
-        file,
-        source: null,
-        altText: file.name,
-      }))])
+    dispatch({
+      type: ActionTypes.ADD_FILES, payload: [
+        ...acceptedFiles.map((file) => ({
+          file,
+          source: null,
+          altText: file.name,
+        }))]
+    })
   }, [files])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: multiple, accept })

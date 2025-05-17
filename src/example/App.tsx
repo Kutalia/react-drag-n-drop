@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import DragNDrop from '../lib'
 import { useDragNDrop } from '../lib/hooks/useDragNDrop'
+import { ActionTypes } from '../lib/contexts/DragNDrop.reducer'
 
 const getRandomItem = () => {
   const sortIndex = Math.floor(Math.random() * 100_000)
@@ -12,11 +13,14 @@ const getRandomItem = () => {
 }
 
 function App() {
-  const { addFiles } = useDragNDrop()
+  const { dispatch } = useDragNDrop()
 
   useEffect(() => {
     const initialData = [...Array(2)].map(getRandomItem)
-    addFiles(initialData)
+
+    dispatch({
+      type: ActionTypes.ADD_FILES, payload: initialData
+    })
   }, [])
 
   return (

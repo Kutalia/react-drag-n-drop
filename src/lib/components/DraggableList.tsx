@@ -7,9 +7,10 @@ import { useDragNDrop } from '../hooks/useDragNDrop';
 import type { StoredFile } from '../types';
 import { DraggableSpace } from "./DraggableSpace";
 import { FileCard } from './FileCard';
+import { ActionTypes } from "../contexts/DragNDrop.reducer";
 
 export const DraggableList: React.FC = () => {
-  const { files, moveFile } = useDragNDrop()
+  const { files, dispatch } = useDragNDrop()
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -37,7 +38,7 @@ export const DraggableList: React.FC = () => {
       return;
     }
 
-    moveFile(draggedItem.id, draggedOverItem.id)
+    dispatch({ type: ActionTypes.MOVE_FILE, payload: { id: draggedItem.id, targetFileId: draggedOverItem.id } })
     setDraggedItem(null);
     setDraggedOverItem(null);
   };
