@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
-import DragNDrop from '../lib'
-import { useDragNDrop } from '../lib/hooks/useDragNDrop'
-import { ActionTypes } from '../lib/contexts/DragNDrop.reducer'
+import DragNDrop, { useDragNDrop } from '../lib'
+import { ActionTypes } from '../lib'
 
 const getRandomItem = () => {
   const sortIndex = Math.floor(Math.random() * 100_000)

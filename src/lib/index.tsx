@@ -1,8 +1,11 @@
 import DragNDrop from './DragNDrop'
-import { DragNDropContext, DragNDropProvider } from './contexts/DragNDrop.context'
+import { DragNDropProvider } from './contexts/DragNDrop.context'
+import { useDragNDrop } from './hooks/useDragNDrop'
 
 export {
   DragNDrop as default,
-  DragNDropContext,
-  DragNDropProvider
+  DragNDropProvider,
+  useDragNDrop,
 }
+
+export { ActionTypes } from './contexts/DragNDrop.reducer'
