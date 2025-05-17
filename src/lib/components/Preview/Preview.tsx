@@ -11,14 +11,14 @@ interface Props {
   file: StoredFile
 }
 
-const PreviewComponent: React.FC<Props> = ({ file }) => {
+const PreviewComponent: React.FC<Props> = ({ file: { file: fileObj, source } }) => {
   const [imgUrl, setImgUrl] = useState<string | null>(null)
 
   useEffect(() => {
-    let url = file.source || ''
+    let url = source || ''
 
-    if (file.file) {
-      url = URL.createObjectURL(file.file)
+    if (fileObj) {
+      url = URL.createObjectURL(fileObj)
     }
 
     setImgUrl(url)
@@ -26,7 +26,7 @@ const PreviewComponent: React.FC<Props> = ({ file }) => {
     return () => {
       URL.revokeObjectURL(url)
     }
-  }, [file])
+  }, [fileObj, source])
 
   const { src } = useImage(imgUrl)
 
