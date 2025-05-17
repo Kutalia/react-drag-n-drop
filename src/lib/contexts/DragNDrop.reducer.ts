@@ -4,13 +4,15 @@ import { getSortedFiles } from "../helpers";
 import type { IndexedInputFile, InputFile, StoredFile } from "../types";
 
 export enum ActionTypes {
-  ADD_FILES = 'add_action',
-  MOVE_FILE = 'move_action',
+  ADD_FILES = 'add_file',
+  MOVE_FILE = 'move_file',
+  REMOVE_FILE = 'remove_file',
 }
 
 export type Actions =
   | { type: ActionTypes.ADD_FILES, payload: (InputFile | IndexedInputFile)[] }
   | { type: ActionTypes.MOVE_FILE, payload: { id: StoredFile['id'], targetFileId: StoredFile['id'] } }
+  | { type: ActionTypes.REMOVE_FILE, payload: StoredFile['id'] }
 
 export const DragNDropReducer = (state: StoredFile[], action: Actions) => {
   switch (action.type) {
@@ -61,6 +63,9 @@ export const DragNDropReducer = (state: StoredFile[], action: Actions) => {
         }).filter((f) => f.id !== id),
         newFile,
       ]
+    }
+    case ActionTypes.REMOVE_FILE: {
+      return state.filter((f) => f.id !== action.payload)
     }
     default:
       return state

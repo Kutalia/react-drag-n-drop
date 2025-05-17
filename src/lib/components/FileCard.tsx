@@ -1,10 +1,18 @@
 import type { StoredFile } from '../types'
 import { Preview } from '../components/Preview/Preview'
+import { useDragNDrop } from '../hooks/useDragNDrop'
+import { ActionTypes } from '../contexts/DragNDrop.reducer'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   file: StoredFile
 }
 export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
+  const { dispatch } = useDragNDrop()
+
+  const removeFile = () => {
+    dispatch({ type: ActionTypes.REMOVE_FILE, payload: file.id })
+  }
+
   return <div
     key={file.id}
     draggable
@@ -28,5 +36,6 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     <div className="tw:flex tw:items-center tw:justify-center tw:h-20">
       <Preview file={file} />
     </div>
+    <button onClick={removeFile}>Remove</button>
   </div>
 }
