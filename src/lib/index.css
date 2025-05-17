@@ -1,3 +1,9 @@
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@layer base {
+    .react-drag-n-drop-wrapper {
+        @import "tailwindcss/preflight";
+    }
+}
+
 @import "tailwindcss/utilities.css" layer(utilities) prefix(tw);

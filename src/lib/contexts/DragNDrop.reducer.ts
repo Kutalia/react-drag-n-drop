@@ -7,12 +7,14 @@ export enum ActionTypes {
   ADD_FILES = 'add_file',
   MOVE_FILE = 'move_file',
   REMOVE_FILE = 'remove_file',
+  EDIT_FILE = 'edit_file',
 }
 
 export type Actions =
   | { type: ActionTypes.ADD_FILES, payload: (InputFile | IndexedInputFile)[] }
   | { type: ActionTypes.MOVE_FILE, payload: { id: StoredFile['id'], targetFileId: StoredFile['id'] } }
   | { type: ActionTypes.REMOVE_FILE, payload: StoredFile['id'] }
+  | { type: ActionTypes.EDIT_FILE, payload: Partial<StoredFile> & { id: StoredFile['id'] } }
 
 export const DragNDropReducer = (state: StoredFile[], action: Actions) => {
   switch (action.type) {
@@ -66,6 +68,11 @@ export const DragNDropReducer = (state: StoredFile[], action: Actions) => {
     }
     case ActionTypes.REMOVE_FILE: {
       return state.filter((f) => f.id !== action.payload)
+    }
+    case ActionTypes.EDIT_FILE: {
+      const index = state.findIndex((f) => f.id === action.payload.id)
+
+      return state.toSpliced(index, 1, { ...state[index], ...action.payload })
     }
     default:
       return state

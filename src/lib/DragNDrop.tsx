@@ -28,7 +28,7 @@ const DragNDrop: React.FC<Props> = ({ multiple, accept }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: multiple, accept })
 
   return (
-    <div>
+    <div className="react-drag-n-drop-wrapper">
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {
