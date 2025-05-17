@@ -1,7 +1,8 @@
 import DragNDrop from './DragNDrop'
-import { DragNDropContext } from './contexts/DragNDrop.context'
+import { DragNDropContext, DragNDropProvider } from './contexts/DragNDrop.context'
 
 export {
   DragNDrop as default,
   DragNDropContext,
+  DragNDropProvider
 }
