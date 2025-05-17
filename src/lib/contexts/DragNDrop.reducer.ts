@@ -48,7 +48,9 @@ export const DragNDropReducer = (state: State, action: Actions) => {
           ...(action.payload.map((f, index) => ({
             ...f,
             id: uuidv4(),
-            sortIndex: (sortedFiles[0]?.sortIndex || 0) - index - 1,
+            sortIndex: (f as IndexedInputFile).sortIndex != null
+              ? (f as IndexedInputFile).sortIndex
+              : (sortedFiles[0]?.sortIndex || 0) - index - 1,
           }))),
         ]
       }

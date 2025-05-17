@@ -2,10 +2,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   ref: React.RefObject<HTMLDivElement | null>;
 }
 
-export const DraggableSpace: React.FC<Props> = ({ children, ref, ...rest }) => {
+export const DraggableSpace: React.FC<Props> = ({ children, className, ref, ...rest }) => {
   return (
     <div
-      className="tw:flex tw:flex-wrap tw:content-start tw:items-start tw:gap-2 tw:p-4 tw:bg-gray-100 tw:rounded-lg tw:max-w-[800px] tw:min-h-32"
+      className={`tw:flex tw:flex-wrap tw:content-start tw:items-start tw:gap-2 tw:p-4 ${className || ''}`}
       {...rest}
       ref={ref}
     >

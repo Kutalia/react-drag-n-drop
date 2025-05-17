@@ -23,7 +23,7 @@ function App() {
   }, [])
 
   return (
-    <div className="tw:bg-amber-100 tw:min-h-screen">
+    <div className="tw:bg-amber-100 tw:min-h-screen container">
       <DragNDrop
         multiple
       />

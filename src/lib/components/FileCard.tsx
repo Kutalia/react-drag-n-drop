@@ -47,7 +47,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     className={`
       tw:px-3 tw:py-2
       tw:w-60
-      tw:h-74
+      tw:h-70
       tw:rounded-md
       tw:text-white 
       tw:bg-black
@@ -61,7 +61,6 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     {...rest}
   >
     <p className="tw:truncate">{file.altText}&nbsp;</p>
-    <p className="tw:truncate">{file.sortIndex}</p>
     <div {...getRootProps()} className="tw:flex tw:items-center tw:justify-center tw:h-20">
       <input {...getInputProps()} />
       {

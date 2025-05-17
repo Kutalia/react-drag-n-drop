@@ -50,7 +50,7 @@ export const FileDropCard: React.FC<Props> = ({ className, ...rest }) => {
       tw:self-stretch
       tw:px-3 tw:py-2
       tw:w-60
-      tw:h-74
+      tw:h-70
       tw:rounded-md
       tw:text-white 
       tw:bg-black
