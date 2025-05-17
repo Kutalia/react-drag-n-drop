@@ -41,6 +41,11 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     editFile({ source: sourceInputRef.current?.value, file: null })
   }
 
+  const disableDragPropagation = (e: React.DragEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   return <div
     key={file.id}
     draggable
@@ -60,8 +65,7 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
     `}
     {...rest}
   >
-    <p className="tw:truncate">{file.altText}&nbsp;</p>
-    <div {...getRootProps()} className="tw:flex tw:items-center tw:justify-center tw:h-20">
+    <div {...getRootProps()} className="tw:flex tw:items-center tw:justify-center tw:h-24">
       <input {...getInputProps()} />
       {
         isDragActive
@@ -70,9 +74,20 @@ export const FileCard: React.FC<Props> = ({ file, className, ...rest }) => {
       }
 
     </div>
-    <input placeholder="Input file description" onChange={(e) => editAltText(e.target.value)} />
+    <input
+      placeholder="Input file description"
+      defaultValue={file.altText || ''}
+      onChange={(e) => editAltText(e.target.value)}
+      draggable
+      onDragStart={disableDragPropagation}
+    />
     <div className="tw:flex tw:gap-2">
-      <input className="tw:w-full" placeholder='File source' ref={sourceInputRef} />
+      <input
+        className="tw:w-full"
+        placeholder='File source' ref={sourceInputRef}
+        draggable
+        onDragStart={disableDragPropagation}
+      />
       <button onClick={handleEditSource}>Save</button>
     </div>
     <button className="tw:cursor-pointer" onClick={removeFile}>Remove</button>

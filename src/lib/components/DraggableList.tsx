@@ -53,7 +53,6 @@ export const DraggableList: React.FC = () => {
         <FileCard
           file={item}
           key={item.id}
-          draggable
           onDragStart={e => handleDragStart(e, item)}
           onDragEnd={() => handleDragEnd()}
           onDragOver={e => handleDragOver(e, item)}
